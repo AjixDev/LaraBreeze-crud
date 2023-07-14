@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StateController;
 use App\Models\State;
 
+require __DIR__ . '/auth.php';
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,7 @@ use App\Models\State;
 |
 */
 
+// Validate Admin routes
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');
@@ -29,9 +32,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__ . '/auth.php';
-
 Route::middleware(['auth'])->group(function () {
+    Route::resource('states', StateController::class)->except(['show']);
+    Route::get('/dashboard', [StateController::class, 'index'])->name('dashboard');
+});
+
+// Middleware to restrict access based on IP range
+Route::middleware(['auth', 'checkip'])->group(function () {
     Route::resource('states', StateController::class)->except(['show']);
     Route::get('/dashboard', [StateController::class, 'index'])->name('dashboard');
 });
@@ -45,4 +52,7 @@ Route::get('/states/{id}', function ($id) {
     ]);
 });
 
-Route::delete('/states/{id}', [StateController::class, 'destroy'])->name('states.destroy');
+// Custom middleware to check the IP address against the Israel IP range
+Route::middleware('checkip')->group(function () {
+    Route::middleware('auth')->get('/dashboard', [StateController::class, 'index'])->name('dashboard');
+});
