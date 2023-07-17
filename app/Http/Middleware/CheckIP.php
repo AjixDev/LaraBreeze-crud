@@ -28,13 +28,14 @@ class CheckIP
          Exclude Local 127.0.0.1 from the restriction logic for development needs
          this conditional can be removed before deployed to public live servers.
         */
+        $userLocalState = 'IL';
         if ($ip === '127.0.0.1') {
             return $next($request);
         }
         /*End of Local IP conditional*/
 
         // Check if the country is Israel, otherwise deny access
-        if ($country !== 'IL') {
+        if ($country !== $userLocalState) {
             return abort(403, 'Access Denied');
         }
 
