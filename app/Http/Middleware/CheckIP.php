@@ -34,7 +34,7 @@ class CheckIP
         }
         /*End of Local IP conditional*/
 
-        // Check if the country is Israel, otherwise deny access
+        // Check if the country is $userLocalState, otherwise deny access
         if ($country !== $userLocalState) {
             return abort(403, 'Access Denied');
         }
