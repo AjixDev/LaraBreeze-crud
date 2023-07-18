@@ -25,20 +25,22 @@ class CheckIP
         /*
         |
         |--------------------------------------------------------------------------
-         Exclude Local 127.0.0.1 from the restriction logic for development needs
-         this conditional can be removed before deployed to public live servers.
+            Adjust your desired state codes to allow access them access to your dashboard
         */
-        $userLocalState = 'IL';
+        $userLocalStates = [
+            'IL',
+        ]; 
+
+        // exclude local IP due to development needs
         if ($ip === '127.0.0.1') {
             return $next($request);
         }
-        /*End of Local IP conditional*/
-
-        // Check if the country is $userLocalState, otherwise deny access
-        if ($country !== $userLocalState) {
+        
+        // Check if the country is in $userLocalStates, otherwise deny access
+        if (!in_array($country, $userLocalStates)) {
             return abort(403, 'Access Denied');
         }
-
+        
         return $next($request);
     }
 }
