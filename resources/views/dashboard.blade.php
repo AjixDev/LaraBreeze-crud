@@ -23,7 +23,7 @@
                                 <label for="state-iso-input" class="block text-gray-700 font-bold mb-2">ISO</label>
                                 <input type="text" id="state-iso-input" name="iso" required class="w-full py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200">
                             </div>
-                            <div class="p-6 w-1 flex items-end">
+                            <div class="p-6 flex justify-end">
                                 <button type="submit" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Create State</button>
                             </div>
                         </form>
