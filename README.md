@@ -30,8 +30,10 @@ To run the project locally, follow these steps:
 
 Once the development server is running, you can access the project by visiting `http://localhost:8000` in your web browser. If you're not logged in, you'll be redirected to the login page. You can create a new account or use the default account provided by Laravel Breeze. After logging in, you'll be redirected to the dashboard where you can manage the states.
 
-Local 127.0.0.1 Exclude from the IP restriction logic for development needs,
-This conditional can be removed before deployed to public live servers.
+### IP Restrictions
+Access that allowed only for specific IP ranges are configured in `app/Http/Middleware/CheckIP.php`.
+Local 127.0.0.1 Exclude from the IP restriction logic due to development needs,
+This conditional can be removed before being deployed to public live servers.
 
 ## Contributing
 
