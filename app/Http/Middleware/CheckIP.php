@@ -24,8 +24,8 @@ class CheckIP
 
         /*
         |
-        |--------------------------------------------------------------------------
-            Adjust your desired state codes to allow access them access to your dashboard
+        |--------------------------------------------------------------------------------------
+            Adjust your desired state codes, to allow their IP ranges access to your dashboard.
         */
         $userLocalStates = [
             'IL',
